@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indie Hackers Playlist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050912;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(255, 255, 255, 0.08);
+      --accent: #7c3aed;
+      --accent-2: #22d3ee;
+      --text: #e5edff;
+      --muted: #9fb1d0;
+      --radius: 18px;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.28), transparent 26%),
+                  radial-gradient(circle at 80% 10%, rgba(34, 211, 238, 0.25), transparent 25%),
+                  radial-gradient(circle at 60% 90%, rgba(59, 130, 246, 0.18), transparent 25%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 26px 18px 32px;
+      min-height: 100vh;
+    }
+    .shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(124, 58, 237, 0.08));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 16px;
+      z-index: 5;
+      backdrop-filter: blur(10px);
+    }
+    .brand {
+      display: grid;
+      gap: 4px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand strong { font-size: 18px; letter-spacing: -0.02em; }
+    .brand span { color: var(--muted); font-size: 14px; }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(120deg, rgba(124,58,237,0.22), rgba(34,211,238,0.18));
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+      white-space: nowrap;
+    }
+    .cta:hover { transform: translateY(-2px); border-color: rgba(255, 255, 255, 0.25); box-shadow: 0 14px 30px rgba(124, 58, 237, 0.35); }
+    main { display: grid; gap: 22px; }
+    .hero {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(124, 58, 237, 0.12));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 14px;
+    }
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pill { width: 36px; height: 5px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 38px);
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+    }
+    p { margin: 0; color: var(--muted); font-size: 16px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 18px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      display: grid;
+      gap: 14px;
+    }
+    .panel h2 { margin: 0; font-size: 20px; letter-spacing: -0.02em; }
+    .video-frame {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #0b1220;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .mini-grid { display: grid; gap: 12px; }
+    .list-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--panel-strong);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .list-card img {
+      width: 100%;
+      border-radius: 10px;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.05);
+    }
+    .list-card strong { display: block; margin-bottom: 6px; color: #fff; letter-spacing: -0.01em; }
+    .list-card p { font-size: 14px; }
+    .list-card a { color: var(--accent-2); font-weight: 600; text-decoration: none; }
+    .list-card a:hover { text-decoration: underline; }
+    .highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .highlight-card {
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(124, 58, 237, 0.07));
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 8px;
+    }
+    footer { text-align: center; color: var(--muted); font-size: 14px; padding: 10px 0 0; }
+    @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) {
+      body { padding: 18px 14px 26px; }
+      header { position: static; flex-direction: column; align-items: flex-start; }
+      .hero { padding: 22px; }
+      .list-card { grid-template-columns: 1fr; }
+      .list-card img { height: 160px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <a class="brand" href="#top">
+        <strong>Indie Hackers Playlist Studio</strong>
+        <span>Ý tưởng sản phẩm độc lập · Học từ thực chiến</span>
+      </a>
+      <a class="cta" href="https://youtube.com/playlist?list=PLJK9YNrTz_MIa6nuGky5147hI7fwlOBWA" target="_blank" rel="noreferrer">Mở playlist trên YouTube</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="tagline"><span class="pill"></span> Built for indie spirits</div>
+        <h1>Hành trình Indie Hackers qua từng câu chuyện, để bạn áp dụng ngay.</h1>
+        <p>Playlist chọn lọc giúp bạn nắm bắt chiến lược, marketing, và cách xây dựng sản phẩm một người. Tất cả được trình bày gọn gàng, tối ưu mobile.</p>
+        <a class="cta" href="https://youtube.com/playlist?list=PLJK9YNrTz_MIa6nuGky5147hI7fwlOBWA&si=Ztze_EoZAp4ZC5cw" target="_blank" rel="noreferrer">Xem đầy đủ trên YouTube →</a>
+      </section>
+
+      <div class="grid">
+        <section class="panel">
+          <h2>Playlist chính</h2>
+          <div class="video-frame">
+            <iframe title="Indie Hackers Playlist" src="https://www.youtube.com/embed/videoseries?list=PLJK9YNrTz_MIa6nuGky5147hI7fwlOBWA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p>Phát toàn bộ series và để YouTube tự động chuyển tập. Bạn vẫn có thể chọn tập cụ thể ngay bên cạnh.</p>
+        </section>
+
+        <section class="panel">
+          <h2>Clip nổi bật</h2>
+          <div class="mini-grid">
+            <div class="video-frame">
+              <iframe title="Highlight 1" src="https://www.youtube.com/embed?listType=playlist&list=PLJK9YNrTz_MIa6nuGky5147hI7fwlOBWA&index=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-frame">
+              <iframe title="Highlight 2" src="https://www.youtube.com/embed?listType=playlist&list=PLJK9YNrTz_MIa6nuGky5147hI7fwlOBWA&index=2&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-frame">
+              <iframe title="Highlight 3" src="https://www.youtube.com/embed?listType=playlist&list=PLJK9YNrTz_MIa6nuGky5147hI7fwlOBWA&index=3&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="panel">
+        <h2>Lộ trình xem nhanh</h2>
+        <div class="mini-grid">
+          <div class="list-card">
+            <img src="https://i.ytimg.com/vi/rtFSmGNsgAU/hqdefault.jpg" alt="Episode thumbnail">
+            <div>
+              <strong>Tư duy sản phẩm từ con số 0</strong>
+              <p>Khởi động cùng mindset indie: làm nhỏ, thử nhanh, lặp lại. Tối ưu cho founder một người.</p>
+              <a href="https://www.youtube.com/watch?v=rtFSmGNsgAU&list=PLJK9YNrTz_MIa6nuGky5147hI7fwlOBWA&index=1" target="_blank" rel="noreferrer">Xem tập 1</a>
+            </div>
+          </div>
+          <div class="list-card">
+            <img src="https://i.ytimg.com/vi/5cx2iWDwd4w/hqdefault.jpg" alt="Episode thumbnail">
+            <div>
+              <strong>Marketing và tìm 100 khách đầu tiên</strong>
+              <p>Case-study về cách tìm kênh phù hợp, validate nhu cầu và giữ chân người dùng.</p>
+              <a href="https://www.youtube.com/watch?v=5cx2iWDwd4w&list=PLJK9YNrTz_MIa6nuGky5147hI7fwlOBWA&index=2" target="_blank" rel="noreferrer">Xem tập 2</a>
+            </div>
+          </div>
+          <div class="list-card">
+            <img src="https://i.ytimg.com/vi/lVYoKKlYfEc/hqdefault.jpg" alt="Episode thumbnail">
+            <div>
+              <strong>Tự động hóa & vận hành gọn nhẹ</strong>
+              <p>Workflow no-code/low-code để giảm chi phí và vận hành ổn định khi bạn làm một mình.</p>
+              <a href="https://www.youtube.com/watch?v=lVYoKKlYfEc&list=PLJK9YNrTz_MIa6nuGky5147hI7fwlOBWA&index=3" target="_blank" rel="noreferrer">Xem tập 3</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="highlights">
+        <div class="highlight-card">
+          <strong>Thiết kế tập trung vào nội dung</strong>
+          <p>Typography rõ ràng, khung video 16:9, màu sắc hiện đại để bạn xem và chọn clip nhanh chóng.</p>
+        </div>
+        <div class="highlight-card">
+          <strong>Trải nghiệm mobile hoàn hảo</strong>
+          <p>Bố cục co giãn, nút CTA lớn, khoảng cách thoáng và panel cố định giúp thao tác thuận tiện trên điện thoại.</p>
+        </div>
+        <div class="highlight-card">
+          <strong>Hành động rõ ràng</strong>
+          <p>Đường dẫn trực tiếp tới từng tập và toàn bộ playlist, giúp bạn bắt đầu ngay không cần tìm kiếm.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Curated with 💜 cho cộng đồng làm sản phẩm độc lập. Cập nhật tự động khi playlist có tập mới.
+    </footer>
+  </div>
+</body>
+</html>
